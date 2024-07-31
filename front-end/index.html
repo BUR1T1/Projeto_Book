@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de livros</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        .button-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .button-group button {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .button-group button:hover {
+            background: #0056b3;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+        form.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .results {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0, 0, 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="button-group">
+            <button id="showAddFormBtn">Adicionar Livro</button>
+            <button id="showSearchFormBtn">Buscar Livro</button>
+        </div>
+
+        <form id="bookForm" class="active">
+            <h2>Adicionar Novo Livro</h2>
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="publisherId">ID do Editor</label>
+                <input type="number" id="publisherId" name="publisherId" required>
+            </div>
+            <div class="form-group">
+                <label for="authorsIds">IDs dos Autores (separados por vírgula)</label>
+                <input type="text" id="authorsIds" name="authorsIds" required>
+            </div>
+            <div class="form-group">
+                <label for="reviewComment">Comentário da Avaliação</label>
+                <input type="text" id="reviewComment" name="reviewComment">
+            </div>
+            <button type="submit">Salvar Livro</button>
+        </form>
+
+        <form id="searchForm">
+            <h2>Buscar Livro</h2>
+            <div class="form-group">
+                <label for="searchById">Buscar por ID</label>
+                <input type="number" id="searchById" name="searchById">
+            </div>
+            <div class="form-group">
+                <label for="searchByTitle">Buscar por Título</label>
+                <input type="text" id="searchByTitle" name="searchByTitle">
+            </div>
+            <button type="submit">Buscar Livro</button>
+        </form>
+
+        <div class="results" id="results" style="display: none;">
+            <h2>Resultado da Busca</h2>
+            <pre id="resultContent"></pre>
+        </div>
+    </div>
+
+    <script>
+        
+const showAddFormBtn = document.getElementById('showAddFormBtn');
+const showSearchFormBtn = document.getElementById('showSearchFormBtn');
+const bookForm = document.getElementById('bookForm');
+const searchForm = document.getElementById('searchForm');
+const results = document.getElementById('results');
+const resultContent = document.getElementById('resultContent');
+
+showAddFormBtn.addEventListener('click', () => {
+    bookForm.classList.add('active');
+    searchForm.classList.remove('active');
+    results.style.display = 'none';
+});
+
+showSearchFormBtn.addEventListener('click', () => {
+    searchForm.classList.add('active');
+    bookForm.classList.remove('active');
+    results.style.display = 'none';
+});
+
+bookForm.addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const publisherId = document.getElementById('publisherId').value;
+    const authorsIds = document.getElementById('authorsIds').value.split(',').map(id => id.trim());
+    const reviewComment = document.getElementById('reviewComment').value;
+
+    const bookRecordDto = {
+        title: title,
+        publisherId: publisherId,
+        authorsIds: authorsIds, 
+        reviewComment: reviewComment
+    };
+
+    const response = await fetch('http://localhost:8080/api/books', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bookRecordDto)
+    });
+
+    if (response.ok) {
+        alert('Livro salvo com sucesso!');
+        bookForm.reset();
+    } else {
+        const errorData = await response.json();
+        alert('Erro ao salvar o livro: ' + errorData.message);
+    }
+});
+
+searchForm.addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const searchById = document.getElementById('searchById').value;
+    const searchByTitle = document.getElementById('searchByTitle').value;
+
+    let url = 'http://localhost:8080/api/books';
+
+    if (searchById) {
+        url += '/' + searchById;
+    } else if (searchByTitle) {
+        url += '/title/' + searchByTitle;
+    } else {
+        alert('Por favor, insira um ID ou um título para buscar.');
+        return;
+    }
+
+    const response = await fetch(url);
+
+    if (response.ok) {
+        const book = await response.json();
+        resultContent.textContent = JSON.stringify(book, null, 2);
+        results.style.display = 'block';
+    } else {
+        alert('Erro ao buscar o livro.');
+        results.style.display = 'none';
+    }
+});
+    </script>
+</body>
+</html>

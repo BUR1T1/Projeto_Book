@@ -18,7 +18,7 @@ public class BookController {
     @Autowired
     private BookServices bookService;
 
-    @PostMapping
+    @PostMapping("/criar-livro")
     public ResponseEntity<BookModel> saveBook(@RequestBody BookRecordDto bookRecordDto) {
         BookModel savedBook = bookService.saveBook(bookRecordDto);
         return ResponseEntity.ok(savedBook);

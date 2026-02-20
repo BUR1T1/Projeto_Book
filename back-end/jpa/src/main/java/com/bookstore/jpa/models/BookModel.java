@@ -1,5 +1,6 @@
 package com.bookstore.jpa.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -12,9 +13,10 @@ import java.util.UUID;
 public class BookModel implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false, length = 150)
     private String title;
 
     @ManyToOne
@@ -25,10 +27,12 @@ public class BookModel implements Serializable {
     @JoinTable(
             name ="tb_book_author",
             joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "autor_id"))
+            inverseJoinColumns = @JoinColumn(name = "autor_id")
+    )
+    @JsonIgnoreProperties("books")
     private Set<AutorModel> autors = new HashSet<>();
 
-    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private ReviewModel review;
 
     // Getters and Setters

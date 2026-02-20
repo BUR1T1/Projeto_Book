@@ -2,6 +2,8 @@ package com.bookstore.jpa.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,17 +13,20 @@ import java.util.UUID;
 @Entity
 @Table(name = "TB_AUTHOR")
 public class AutorModel implements Serializable {
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @NotBlank // Impede nomes vazios ou só com espaços
+    @Size(min = 2, max = 100) // Define limites de caracteres
     @Column(nullable = false, unique = true)
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "autors", fetch = FetchType.LAZY)
+
     private Set<BookModel> books = new HashSet<>();
 
     public Set<BookModel> getBooks() {

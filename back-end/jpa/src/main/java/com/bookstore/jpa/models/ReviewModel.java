@@ -20,7 +20,7 @@ public class ReviewModel implements Serializable {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_id", nullable = false)
     private BookModel book;
 
     // Getters and Setters

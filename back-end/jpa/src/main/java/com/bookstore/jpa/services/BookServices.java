@@ -5,7 +5,9 @@ import com.bookstore.jpa.models.*;
 import com.bookstore.jpa.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -27,31 +29,36 @@ public class BookServices {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    public BookModel saveBook(BookRecordDto bookRecordDto) {
+    @Transactional
+    public BookModel saveBook(BookRecordDto dto) {
         BookModel book = new BookModel();
-        book.setTitle(bookRecordDto.title());
+        book.setTitle(dto.title());
 
-        // Associar publisher
-        Optional<PublisherModel> publisher = publisherRepository.findById(bookRecordDto.publisherId());
-        publisher.ifPresent(book::setPublisher);
+        // Buscar e vincular a Editora
+        PublisherModel publisher = publisherRepository.findById(dto.publisherId())
+                .orElseThrow(() -> new RuntimeException("Editora não encontrada"));
+        book.setPublisher(publisher);
 
-        // Associar autores
-        Set<AutorModel> autors = bookRecordDto.authorsIds().stream()
-                .map(autorRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toSet());
-        book.setAutors(autors);
+        // Buscar e vincular os Autores (Obrigatório)
+        Set<AutorModel> authors = new HashSet<>(autorRepository.findAllById(dto.authorIds()));
 
-        // Associar review
-        if (bookRecordDto.reviewComment() != null) {
+        if (authors.isEmpty()) {
+            throw new RuntimeException("É necessário informar ao menos um autor válido.");
+        }
+
+        if (dto.reviewComment() != null) {
             ReviewModel review = new ReviewModel();
-            review.setComment(bookRecordDto.reviewComment());
+            review.setComment(dto.reviewComment());
+
+            // Vinculação bidirecional correta
             review.setBook(book);
             book.setReview(review);
         }
 
-        return bookRepository.save(book);
+// Em vez de apenas salvar, vamos dar um flush
+        book.setAutors(authors);
+        return bookRepository.saveAndFlush(book);
+
     }
 
     public Optional<BookModel> findBookById(UUID id) {

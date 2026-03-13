@@ -1,146 +1,223 @@
-.registro{
-    width:100%;
-    min-height:100vh;
-    padding-top:150px;  
-    display:flex;
-    flex-direction:column; 
-    align-items:center;
-    justify-content:center;
-  
-    background:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.65)),
-    url("../Home/imgEscriorio.jpg");
-  
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-  }
-  
-  /* TITULO */
-  
-  .titulo-registro{
-    font-size:70px;
-    margin-bottom:-40px;
-    font-family:"Bebas Neue", sans-serif;
-    color:rgb(255, 89, 0);
-  }
-  
-  /* CONTAINER */
-  
-  .registro-container{
-    width:1000px;
-    display:flex;
-    gap:40px;
-    color:rgb(255, 255, 255);
-  
-  }
-  
-  /* BLOCO DE INSTRUÇÕES */
-  
-  .instrucoes{
-  h2{
-      color:rgb(255, 89, 0);
-      font-size: 60px;
-      };
-    
-    width:40%;
-    font-family:"Bebas Neue", sans-serif;
-    font-size:30px;
-    line-height:1.5;
-  }
-  
-  /* BLOCO DO FORMULÁRIO */
-  
-  .formulario{
-    width:60%;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-    font-family:"Bebas Neue", sans-serif;
-  }
-  
-  /* CAMPOS */
-  
-  .formulario input,
-  .formulario textarea{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:5px;
-    font-size:16px;
-  }
-  
-  /* TITULO DA PÁGINA */
-  
-  .titulo-registro{
-    position:absolute;
-    top:120px;
-  
-    font-size:70px;
-    font-family:"Bebas Neue", sans-serif;
-    color:rgb(255, 89, 0);
-  }
-  
-  /* BOTÃO */
-  
-  .btn-registro{
-    padding:12px 20px;
-  
-    background:rgb(255, 89, 0);
-    color:black;
-  
-    font-family:"Bebas Neue", sans-serif;
-    font-size:20px;
-  
-    border-radius:6px;
-    cursor:pointer;
-    text-align:center;
-  
-    transition:0.2s;
-    
-  }
-  
-  .btn-registro:hover{
-    transform:scale(1.05);
-    background:rgb(255,110,30);
-  }
+.registro {
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)),
+        url("../Home/imgEscriorio.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Bebas Neue", sans-serif;
+}
 
-  /* CONTAINER */
+.titulo-registro {
+    font-size: clamp(40px, 8vw, 70px);
+    margin-bottom: 30px;
+    color: #ff5900;
+    text-align: center;
+    width: 100%;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
 
-.campo-imagem{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  
-  /* ESCONDE INPUT PADRÃO */
-  
-  .campo-imagem input{
-    display:none;
-  }
-  
-  /* BOTÃO BONITO */
-  
-  .upload-label{
-    display:inline-block;
-    padding:12px 20px;
-  
-    background:rgb(255, 89, 0);
-    color:black;
-  
-    font-family:"Bebas Neue", sans-serif;
-    font-size:20px;
-  
-    border-radius:6px;
-    cursor:pointer;
-    text-align:center;
-  
-    transition:0.2s;
-  }
-  
-  /* HOVER */
-  
-  .upload-label:hover{
-    transform:scale(1.05);
-    background:rgb(255,110,30);
-  }
+.registro-container {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.instrucoes {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.instrucoes h2 {
+    color: #ff5900;
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.instrucoes p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    opacity: 0.95;
+}
+
+.formulario {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.campo label {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.formulario input,
+.formulario textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+    border-color: rgba(255, 89, 0, 0.9);
+    box-shadow: 0 0 0 3px rgba(255, 89, 0, 0.25);
+}
+
+.formulario textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.campo-imagem {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.campo-imagem input {
+    display: none;
+}
+
+.upload-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 40px;
+    border: 2px solid #ff5900;
+    background: rgba(255, 89, 0, 0.1);
+    color: #ff5900;
+    font-size: 18px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    gap: 10px;
+}
+
+.upload-label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,89,0,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.upload-label:hover {
+    background: #ff5900;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.upload-label:hover::before {
+    left: 100%;
+}
+
+.btn-registro {
+    grid-column: 1 / -1;
+    padding: 15px 40px;
+    border: 2px solid #ff5900;
+    background: rgba(255, 89, 0, 0.1);
+    color: #ff5900;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Bebas Neue", sans-serif;
+    cursor: pointer;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-registro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,89,0,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-registro:hover {
+    background: #ff5900;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.btn-registro:hover::before {
+    left: 100%;
+}
+
+@media (max-width: 1024px) {
+    .registro-container {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .titulo-registro {
+        font-size: 50px;
+    }
+
+    .instrucoes h2 {
+        font-size: 34px;
+    }
+
+    .instrucoes p {
+        font-size: 18px;
+    }
+}

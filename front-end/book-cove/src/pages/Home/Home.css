@@ -1,60 +1,210 @@
-.home{
-    width:100%;
-    height:100vh; /* ocupa a tela inteira */
-  
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  
-    background:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.652)),
-    url("../Home//imgEscriorio.jpg");
-  
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-  }
-  
-  /* CONTEÚDO */
-  
-  .home-container{
-    max-width:800px;
-    text-align:center;
-    color:rgb(255, 255, 255);
-    padding:40px;
-  }
-  
-  /* TITULO */
-  
-  .home-title{
-    font-size:80px;
-    margin-bottom:20px;
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    color:rgb(255, 89, 0);
+.home {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.295), rgba(0,0,0,0.8)),
+                url("./imgEscriorio.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
 
-  }
-  
-  /* TEXTO */
-  
-  .home-description{
-    font-size:30px;
-    line-height:1.6;
-    margin-bottom:30px;
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255,89,0,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* CONTEÚDO */
+
+.home-container {
+    max-width: 900px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out;
+}
+
+.home-header {
+    margin-bottom: 30px;
+}
+
+.title-decoration {
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #ff5900, #ff8533);
+    margin: 0 auto;
+    border-radius: 2px;
+    animation: expandWidth 1.5s ease-out 0.5s both;
+}
+
+@keyframes expandWidth {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100px;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TITULO */
+
+.home-title {
+    font-size: clamp(50px, 10vw, 100px);
+    margin-bottom: 30px;
     font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
-    color: white; 
-      
-  }
-  
-  /* BOTÃO */
-  
-  .home-button{
-    padding:12px 30px;
-    border:none;
-    color:rgb(255, 89, 0);
-    color:rgb(0, 0, 0);
-    font-size:16px;
-    cursor:pointer;
-    border-radius:5px;
-  }
+    color: #ff5900;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+    letter-spacing: 3px;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+    }
+    to {
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.7), 0 0 20px rgba(255,89,0,0.5);
+    }
+}
+
+/* TEXTO */
+
+.home-description {
+    font-size: clamp(18px, 4vw, 32px);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* BOTÃO */
+
+.home-button {
+    padding: 15px 40px;
+    border: 2px solid #ff5900;
+    background: rgba(255, 89, 0, 0.1);
+    color: #ff5900;
+    font-size: 18px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button-arrow {
+    transition: transform 0.3s ease;
+    font-size: 20px;
+}
+
+.home-button:hover .button-arrow {
+    transform: translateX(5px);
+}
+
+.home-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,89,0,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.home-button:hover {
+    background: #ff5900;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 89, 0, 0.4);
+}
+
+.home-button:hover::before {
+    left: 100%;
+}
+
+.home-button:active {
+    transform: translateY(-1px);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+    .home-container {
+        padding: 30px 20px;
+        margin: 20px;
+        border-radius: 15px;
+    }
+
+    .home-title {
+        font-size: 60px;
+        margin-bottom: 20px;
+    }
+
+    .home-description {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .home-button {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-title {
+        font-size: 50px;
+    }
+
+    .home-description {
+        font-size: 20px;
+    }
+
+    .home-button {
+        padding: 10px 25px;
+        font-size: 14px;
+    }
+}

@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import "./Catalago.css";
 
+import img1984 from "../../assets/1984.png"
+import domcasmurro from "../../assets/domcasmurro.jpg"
+import pequenoPrincipe from "../../assets/pequenoprincipe.webp"
+
 function Catalago() {
     const [livros, setLivros] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -14,9 +18,67 @@ function Catalago() {
                 setLivros(data);
             } else {
                 console.error("Erro ao buscar livros: Status", response.status);
+                setLivros([
+                    {
+                        id: 1,
+                        title: "Dom Casmurro",
+                        capa: domcasmurro,
+                        review: {
+                            comment: "Uma obra-prima da literatura brasileira, cheia de intrigas e reflexões sobre a vida."
+                        },
+                        autorReview: "Machado de Assis"
+                    },
+                    {
+                        id: 2,
+                        title: "1984",
+                        capa: img1984,
+                        review: {
+                            comment: "Um clássico distópico que continua atual, alertando sobre vigilância e controle social."
+                        },
+                        autorReview: "George Orwell"
+                    },
+                    {
+                        id: 3,
+                        title: "O Pequeno Príncipe",
+                        capa: pequenoPrincipe,
+                        review: {
+                            comment: "Uma história encantadora sobre amizade, amor e as coisas importantes da vida."
+                        },
+                        autorReview: "Antoine de Saint-Exupéry"
+                    }
+                ]);
             }
         } catch (error) {
             console.error("Erro de conexão ao buscar catálogo:", error);
+            setLivros([
+                {
+                    id: 1,
+                    title: "Dom Casmurro",
+                    capa: domcasmurro,
+                    review: {
+                        comment: "Uma obra-prima da literatura brasileira, cheia de intrigas e reflexões sobre a vida."
+                    },
+                    autorReview: "Machado de Assis"
+                },
+                {
+                    id: 2,
+                    title: "1984",
+                    capa: img1984,
+                    review: {
+                        comment: "Um clássico distópico que continua atual, alertando sobre vigilância e controle social."
+                    },
+                    autorReview: "George Orwell"
+                },
+                {
+                    id: 3,
+                    title: "O Pequeno Príncipe",
+                    capa: pequenoPrincipe,
+                    review: {
+                        comment: "Uma história encantadora sobre amizade, amor e as coisas importantes da vida."
+                    },
+                    autorReview: "Antoine de Saint-Exupéry"
+                }
+            ]);
         } finally {
             setLoading(false);
         }
@@ -79,7 +141,7 @@ function Catalago() {
                         </div>
                     ))
                 ) : (
-                    <p>Nenhum livro encontrado no banco de dados.</p>
+                    <p className="no-books">Nenhum livro encontrado no banco de dados.</p>
                 )}
             </div>
         </section>

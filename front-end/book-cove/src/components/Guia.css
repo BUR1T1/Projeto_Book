@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=New+Amsterdam&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=New+Amsterdam&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+.header{
+  width:100%;
+  height:70px;
+
+  position:absolute;
+  top:0;
+  left:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:transparent; /* deixa transparente */
+  z-index:10;
+}
+
+/* NAV */
+.nav {
+  width: 100%;
+  max-width: 1400px;       /* largura máxima do conteúdo */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo à esquerda, menu à direita */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* LOGO */
+.logoSite {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 32px;
+  color: white;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  font-family: "Roboto", sans-serif;
+}
+
+/* LINKS */
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.menu a:hover {
+  color:rgb(255, 89, 0);
+}

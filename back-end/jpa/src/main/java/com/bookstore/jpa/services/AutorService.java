@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class AutorService {
 
@@ -19,5 +23,17 @@ public class AutorService {
         author.setName(autorDto.name());
         return autorRepository.save(author);
 
+    }
+
+    public List<AutorModel> findAllAutor(){
+        return autorRepository.findAll();
+    }
+
+    public Optional<AutorModel> findAutorByid(UUID id){
+        return autorRepository.findById(id);
+    }
+
+    public Optional<AutorModel> findByAutorname(String name){
+        return autorRepository.findByName(name);
     }
 }

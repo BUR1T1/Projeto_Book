@@ -2,6 +2,7 @@ package com.bookstore.jpa.dtos;
 
 import jakarta.validation.constraints.NotNull;
 
-public record PublisherDto (@NotNull String name){
+public record PublisherDto (
+        @NotNull String name){
 
 }

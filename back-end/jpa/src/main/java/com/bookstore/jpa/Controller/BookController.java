@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -24,14 +26,19 @@ public class BookController {
         return ResponseEntity.ok(savedBook);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/ListarBooks")
+    public List<BookModel> listarBooks(){
+        return bookService.findBookAll();
+    }
+
+    @GetMapping("/buscarporID{id}")
     public ResponseEntity<BookModel> getBookById(@PathVariable UUID id) {
         Optional<BookModel> book = bookService.findBookById(id);
         return book.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/title/{title}")
-    public ResponseEntity<BookModel> getBookByTitle(@PathVariable String title) {
+    @GetMapping("/buscartitle/{title}")
+    public ResponseEntity<BookModel> buscarBookByTitle(@PathVariable String title) {
         Optional<BookModel> book = bookService.findBookByTitle(title);
         return book.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }

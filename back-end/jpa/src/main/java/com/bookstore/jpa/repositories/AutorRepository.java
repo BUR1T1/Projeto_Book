@@ -3,7 +3,10 @@ package com.bookstore.jpa.repositories;
 import com.bookstore.jpa.models.AutorModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface AutorRepository extends JpaRepository <AutorModel , UUID>{
+
+    Optional<AutorModel> findByName(String name);
 }

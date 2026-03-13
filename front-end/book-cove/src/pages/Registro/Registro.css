@@ -1,0 +1,146 @@
+.registro{
+    width:100%;
+    min-height:100vh;
+    padding-top:150px;  
+    display:flex;
+    flex-direction:column; 
+    align-items:center;
+    justify-content:center;
+  
+    background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.65)),
+    url("../Home/imgEscriorio.jpg");
+  
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  
+  /* TITULO */
+  
+  .titulo-registro{
+    font-size:70px;
+    margin-bottom:-40px;
+    font-family:"Bebas Neue", sans-serif;
+    color:rgb(255, 89, 0);
+  }
+  
+  /* CONTAINER */
+  
+  .registro-container{
+    width:1000px;
+    display:flex;
+    gap:40px;
+    color:rgb(255, 255, 255);
+  
+  }
+  
+  /* BLOCO DE INSTRUÇÕES */
+  
+  .instrucoes{
+  h2{
+      color:rgb(255, 89, 0);
+      font-size: 60px;
+      };
+    
+    width:40%;
+    font-family:"Bebas Neue", sans-serif;
+    font-size:30px;
+    line-height:1.5;
+  }
+  
+  /* BLOCO DO FORMULÁRIO */
+  
+  .formulario{
+    width:60%;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    font-family:"Bebas Neue", sans-serif;
+  }
+  
+  /* CAMPOS */
+  
+  .formulario input,
+  .formulario textarea{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+  }
+  
+  /* TITULO DA PÁGINA */
+  
+  .titulo-registro{
+    position:absolute;
+    top:120px;
+  
+    font-size:70px;
+    font-family:"Bebas Neue", sans-serif;
+    color:rgb(255, 89, 0);
+  }
+  
+  /* BOTÃO */
+  
+  .btn-registro{
+    padding:12px 20px;
+  
+    background:rgb(255, 89, 0);
+    color:black;
+  
+    font-family:"Bebas Neue", sans-serif;
+    font-size:20px;
+  
+    border-radius:6px;
+    cursor:pointer;
+    text-align:center;
+  
+    transition:0.2s;
+    
+  }
+  
+  .btn-registro:hover{
+    transform:scale(1.05);
+    background:rgb(255,110,30);
+  }
+
+  /* CONTAINER */
+
+.campo-imagem{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  
+  /* ESCONDE INPUT PADRÃO */
+  
+  .campo-imagem input{
+    display:none;
+  }
+  
+  /* BOTÃO BONITO */
+  
+  .upload-label{
+    display:inline-block;
+    padding:12px 20px;
+  
+    background:rgb(255, 89, 0);
+    color:black;
+  
+    font-family:"Bebas Neue", sans-serif;
+    font-size:20px;
+  
+    border-radius:6px;
+    cursor:pointer;
+    text-align:center;
+  
+    transition:0.2s;
+  }
+  
+  /* HOVER */
+  
+  .upload-label:hover{
+    transform:scale(1.05);
+    background:rgb(255,110,30);
+  }

@@ -19,8 +19,8 @@ public class AutorModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotBlank // Impede nomes vazios ou só com espaços
-    @Size(min = 2, max = 100) // Define limites de caracteres
+    @NotBlank
+    @Size(min = 2, max = 100)
     @Column(nullable = false, unique = true)
     private String name;
 

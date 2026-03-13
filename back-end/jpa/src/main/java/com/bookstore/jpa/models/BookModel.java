@@ -19,6 +19,13 @@ public class BookModel implements Serializable {
     @Column(nullable = false, length = 150)
     private String title;
 
+    @Column(name = "AUTOR_REVIW")
+    private String autorReview;
+
+    @Lob
+    @Column(name = "CAPA_LIVRO", length = 50000,columnDefinition = "TEXT")
+    private String capa;
+
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private PublisherModel publisher;
@@ -75,4 +82,13 @@ public class BookModel implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getAutorReview(String s){ return autorReview;}
+
+    public void setAutorReview(String s) {this.autorReview = autorReview;}
+
+    public String getCapa(){ return capa;}
+
+    public void setCapa(String capa){ this.capa = capa; }
+
 }

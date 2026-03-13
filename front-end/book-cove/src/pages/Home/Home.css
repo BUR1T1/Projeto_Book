@@ -1,0 +1,60 @@
+.home{
+    width:100%;
+    height:100vh; /* ocupa a tela inteira */
+  
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  
+    background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.652)),
+    url("../Home//imgEscriorio.jpg");
+  
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  
+  /* CONTEÚDO */
+  
+  .home-container{
+    max-width:800px;
+    text-align:center;
+    color:rgb(255, 255, 255);
+    padding:40px;
+  }
+  
+  /* TITULO */
+  
+  .home-title{
+    font-size:80px;
+    margin-bottom:20px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    color:rgb(255, 89, 0);
+
+  }
+  
+  /* TEXTO */
+  
+  .home-description{
+    font-size:30px;
+    line-height:1.6;
+    margin-bottom:30px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    color: white; 
+      
+  }
+  
+  /* BOTÃO */
+  
+  .home-button{
+    padding:12px 30px;
+    border:none;
+    color:rgb(255, 89, 0);
+    color:rgb(0, 0, 0);
+    font-size:16px;
+    cursor:pointer;
+    border-radius:5px;
+  }
